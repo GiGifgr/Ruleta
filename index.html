@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Ruleta Aleatoria</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Raleway:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+
+
+
+
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, white, #f8f8f8);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+        min-height: 100vh;
+  overflow-x: hidden;
+      color: black;
+      overflow-x: hidden;
+    }
+
+  h1 {
+  font-family: 'Golos Text', sans-serif;
+  font-weight: 800;
+  font-size: 39px;
+  margin-top: 80px;
+}
+
+h1 + p {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: #444;
+  margin-top: 5px;   /* 🔽 Subirlo */
+  margin-bottom: 20px;
+}
+
+
+
+
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 300px;
+  background-color: white;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      height: 30px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+   .nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+  flex-grow: 1;
+}
+
+
+    .nav-item {
+      font-size: 16px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+
+.btn-pink {
+  background-color: #dd1f96;
+  color: white;
+  padding: 10px 25px; /* ← Aumenta espacio interno a los lados */
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;               /* ← Añade esto */
+  align-items: center;         /* ← Centrado vertical */
+  justify-content: center;     /* ← Centrado horizontal */
+}
+
+
+ .top-panels {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin: 20px 0 10px 0;
+}
+
+.panel {
+  width: 640px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   font-family: 'Rubik', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  box-sizing: border-box;
+}
+
+
+
+
+.panel:first-child {
+  border: 1px solid #dd1f96;
+  background-color: #fff7f7; /* 👈 Nuevo fondo rosa claro */
+}
+
+
+   .panel:first-child::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 24px;
+  height: 24px;
+  background-image: url('https://i.imgur.com/qgms4EC.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.panel:last-child::after {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 24px;
+  height: 24px;
+  background-image: url('https://i.imgur.com/7zhcqMX.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.panel:last-child {
+  color: #555; /* 👈 texto principal, solo un poco más claro */
+}
+
+.panel:last-child span {
+  color: #666 !important; /* 👈 descripción, apenas más pálida */
+}
+
+
+
+.panel span {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  margin-top: 5px;
+  color: #777;
+  font-size: 16px;
+}
+
+
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1300px;
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+
+.sidebar {
+  width: 300px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px; /* 👈 Esto lo baja ligeramente */
+}
+
+
+
+
+.tab-menu button,
+.mis-ruletas {
+  width: calc(100% + 23px);
+  height: 54px;
+  background: linear-gradient(to bottom, #ffffff, #e9e6f5);
+  border: 1px solid #d6d6d6;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+    justify-content: flex-start;
+
+
+  border-radius: 0;
+  box-sizing: border-box;
+  margin: 0 -7px;
+}
+
+
+
+.tab-menu {
+  margin-top: -22px; /* más arriba */
+  margin-left: -8px; /* eliminar margen blanco izquierdo */
+}
+
+
+
+
+.entries {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 14px 0 10px 0; /* arriba: 14px, abajo: 10px */
+}
+
+
+.entries button {
+ width: 95px; /* o el ancho que tú prefieras */
+  padding: 6px 4px;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 48px; /* 🔽 menos altura que antes */
+}
+
+
+.entries button img {
+  margin-bottom: 4px;
+}
+
+
+
+    .entries button::before {
+      font-size: 16px;
+      margin-bottom: 3px;
+    }
+
+    .entries button:nth-child(1)::before { content: '\21C5'; }
+    .entries button:nth-child(3)::before { content: '\1F5D1'; }
+
+    .input-list {
+      margin-top: 10px;
+    }
+
+   .input-list textarea {
+  width: 100%;
+  height: 200px;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.input-list textarea:focus-visible {
+  outline: 2px solid #ff007f !important;
+}
+
+textarea:focus-visible {
+  outline: 2px solid #ff007f !important;
+  border-color: #ff007f !important;
+}
+
+
+
+.entry-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+
+.entry-box .contenido {
+ 
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 240px; /* 🟢 fijamos un ancho constante */
+  box-sizing: border-box;
+  margin-right: 8px;
+}
+
+
+
+.entry-box .porcentaje {
+  color: #666;
+  font-size: 13px;
+}
+
+
+
+.entry-box .tools {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+}
+
+.entry-box .tools img {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+
+
+#flecha {
+  pointer-events: none;
+}
+
+
+    .btn-agregar {
+      background-color: #dd1f96;;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .btn-pink, .btn-green {
+      width: calc(50% - 5px);
+      margin-top: 10px;
+    }
+
+    .btn-green {
+      background-color: #00c853;
+      color: white;
+      font-size: 16px;
+    }
+
+.mis-ruletas {
+ background: linear-gradient(to bottom, #ffffff, #e9e6f5);
+  border: 1px solid #d6d6d6;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  font-size: 15px;
+  height: 54px;
+  padding: 0 16px;
+  margin: 0 -16px;
+  box-sizing: border-box;
+  border-radius: 0;
+  width: calc(100% + 31px);
+}
+
+
+
+
+
+    .avanzado-label {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .avanzado-label input[type="checkbox"] {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      background-color: #2196F3;
+      border-radius: 3px;
+      margin-right: 6px;
+      position: relative;
+    }
+
+    .avanzado-label input[type="checkbox"]:checked::after {
+      content: '\2713';
+      color: white;
+      font-size: 13px;
+      position: absolute;
+      top: -1px;
+      left: 3px;
+    }
+
+.ruleta-container {
+  flex: 1;
+  background: #e0f0ff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+
+    canvas {
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border: 10px solid #fff;
+    }
+
+#flecha {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 160px); /* Ajusta esta posición para acercar la flecha a la ruleta */
+  width: 50px;
+  height: 45px;
+  transform: translateY(-50%) rotate(0deg);
+  transform-origin: bottom center; /* Ajusta el punto de anclaje */
+  z-index: 11;
+}
+
+.fullscreen #flecha {
+  left: calc(50% + 260px); /* Ajusta esta posición para acercar la flecha a la ruleta en pantalla completa */
+}
+
+    #logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 85px;
+      height: 85px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+  #logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+
+    /* Modo pantalla completa */
+    .fullscreen {
+  background-color: #e0f0ff !important;
+  height: 100vh;
+}
+
+
+    .fullscreen .header,
+    .fullscreen .top-panels,
+    .fullscreen h1,
+    .fullscreen p,
+    .fullscreen .sidebar {
+      display: none !important;
+    }
+
+.fullscreen body {
+  margin: 0;
+  padding: 0;
+  background-color: #e0f0ff !important;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+    .fullscreen .main-content {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+    }
+
+    .fullscreen .ruleta-container {
+      width: 580px !important;
+      height: 580px !important;
+      background: #e0f0ff;
+    }
+
+    .fullscreen canvas {
+      width: 550px !important;
+      height: 550px !important;
+    }
+
+.fullscreen {
+  background-color: #e0f0ff !important;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fullscreen #flecha {
+  left: calc(50% + 245px); /* Ajusta esta posición para acercar la flecha a la ruleta en pantalla completa */
+}
+
+    .fullscreen #logo {
+      z-index: 10;
+    }
+
+#resultado {
+  display: none;
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px; /* 🟢 Tamaño reducido por defecto */
+  font-weight: bold;
+  color: #000;
+  background: none;
+  padding: 0;
+  z-index: 1000;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #FFF;
+  opacity: 0;
+  animation: confetti-explosion 2s ease-out forwards;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+
+
+
+
+@keyframes confetti-explosion {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(var(--translate-x)) translateY(var(--translate-y)) rotate(720deg) scale(0.8);
+    opacity: 0;
+  }
+}
+
+
+
+
+
+
+html.fullscreen,
+body.fullscreen {
+  background-color: #e0f0ff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+body.fullscreen {
+  background: #e0f0ff !important;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avanzado-label input[type="checkbox"]:not(:checked) {
+  background-color: #ccc;
+}
+
+#textareaOpciones:focus {
+  border-color: #dd1f96 !important;
+  box-shadow: 0 0 0 1px #dd1f96 !important;
+  outline: none !important;
+}
+
+.brand-app {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 20px; /* ← puedes subir o bajar el número */
+}
+
+.brand-sorteos {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px; /* ← asegúrate que ambas estén iguales, o puedes diferenciarlas */
+}
+
+.nav-item,
+.btn-pink {
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: 500 !important;
+}
+
+
+.mis-ruletas {
+  font-size: 16px !important;
+}
+
+.mis-ruletas span {
+  font-size: inherit !important;
+}
+
+button {
+  border: none !important;
+}
+
+.btn-green,
+.btn-pink,
+.entries button {
+  border: none !important;
+}
+
+
+
+
+
+  </style>
+
+<script>
+  const TOKEN_KEY = "last-valid-token"; // El token válido actual
+  const USED_TOKENS_KEY = "used-tokens"; // Los tokens ya usados
+  const ACCESS_UNTIL_KEY = "token-ok-until"; // El tiempo en que el token es válido
+
+  // Función para pedir el token y validar el acceso
+  function pedirToken() {
+    const accesoGuardado = localStorage.getItem(ACCESS_UNTIL_KEY);
+    const ahora = Date.now();
+    
+    // Si el token es válido (no ha expirado), se elimina el bloqueo
+    if (accesoGuardado && parseInt(accesoGuardado) > ahora) {
+      document.getElementById("bloqueoToken").remove();
+      return;
+    }
+
+    // Si el token ha caducado o no existe
+    const ingreso = prompt("Introduce el token para acceder a la ruleta:");
+    const tokenActual = localStorage.getItem(TOKEN_KEY); // El último token válido
+    const usados = JSON.parse(localStorage.getItem(USED_TOKENS_KEY) || "[]");
+
+    // Si el token es válido y no ha sido usado antes
+    if (ingreso === tokenActual && !usados.includes(ingreso)) {
+      usados.push(ingreso); // Agregar el token a la lista de usados
+      localStorage.setItem(USED_TOKENS_KEY, JSON.stringify(usados)); // Guardar la lista de usados
+      localStorage.setItem(ACCESS_UNTIL_KEY, ahora + 1 * 60 * 1000); // Acceso por 1 minuto
+      document.getElementById("bloqueoToken").remove(); // Elimina el bloqueo de la pantalla
+    } else {
+      document.getElementById("bloqueoToken").innerText = "Token incorrecto o ya fue usado.";
+    }
+  }
+
+  // Se ejecuta al cargar la página
+  window.addEventListener("load", () => {
+    setTimeout(pedirToken, 100);
+  });
+</script>
+
+<script>
+  const secretKey = "superclaveGiGi0410";
+  let offset = 0;
+
+  // Función para generar un nuevo token aleatorio basado en el tiempo
+  function generateToken() {
+    const now = Math.floor(Date.now() / 1000);  // Tiempo actual en segundos
+    const raw = `${secretKey}-${now}`;
+    return sha256(raw).slice(0, 6).toUpperCase();  // Devuelve los primeros 6 caracteres
+  }
+
+  // Función para actualizar el token
+  function updateToken() {
+    const nuevoToken = generateToken();
+    document.getElementById("token").textContent = nuevoToken;  // Muestra el token
+    localStorage.setItem(TOKEN_KEY, nuevoToken);  // Guarda el nuevo token en localStorage
+    localStorage.setItem("last-used-token", "");  // Invalida el token anterior
+  }
+
+  // Llamada para cambiar a un token nuevo cuando el botón es presionado
+  function generarNuevoToken() {
+    offset++;  // Aumenta el offset para generar un token diferente
+    updateToken();
+  }
+
+  // Inicializa el primer token al cargar la página
+  updateToken();
+</script>
+
+
+
+
+
+
+</script>
+
+
+</head>
+<body>
+<div id="bloqueoToken"
+  style="position: fixed; inset: 0; background: black; color: white;
+         z-index: 9999; display: flex; align-items: center; justify-content: center;
+         font-family: sans-serif; font-size: 18px;">
+  Verificando token...
+</div>
+
+
+
+ <div class="header">
+  <div class="logo-container">
+     <img src="https://i.imgur.com/xPdvYbw.png" alt="Logo" class="logo" style="width: 36px; height: 36px; margin-right: 8px;">
+
+   <span class="brand">
+  <span class="brand-app">App</span><span class="brand-sorteos">Sorteos</span>
+</span>
+
+  </div>
+  
+  <div class="nav-buttons">
+  <span class="nav-item">
+    <img src="https://i.imgur.com/JFFHGZm.png" style="width: 20px; height: 20px; object-fit: contain; margin-right: 6px; vertical-align: middle;">
+    Aplicaciones
+    <img src="https://i.imgur.com/dv1ijDG.png" style="width: 10px; height: 10px; margin-left: 5px;">
+  </span>
+
+  <span class="nav-item">Precios</span>
+
+  <span class="nav-item">
+    Ayuda
+    <img src="https://i.imgur.com/dv1ijDG.png" style="width: 10px; height: 10px; margin-left: 5px;">
+  </span>
+</div>
+
+<div class="nav-right">
+  <span class="nav-item">Ingresar</span>
+  <button class="btn-pink">Crear cuenta</button>
+  <span class="nav-item">
+    ES
+    <img src="https://i.imgur.com/dv1ijDG.png" style="width: 10px; height: 10px; margin-left: 5px;">
+  </span>
+</div>
+
+</div>
+
+
+ <h1 style="margin-bottom: 4px;">La Ruleta Aleatoria</h1>
+
+  <p>¡Gira la ruleta y obtén tus ganadores al azar!</p>
+
+  <div class="top-panels">
+    <div class="panel">
+      Ruleta Clásica
+      <span>Los participantes (o tú), giran la ruleta anónimamente.</span>
+    </div>
+    <div class="panel">
+      Ruleta con Registro
+      <span>Los participantes se registran, dejan sus datos, y luego giran la ruleta</span>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="sidebar">
+<div class="tab-menu">
+  <button>
+    <img src="https://i.imgur.com/jIeF5MX.png" style="width: 18px; margin-right: 17px;">
+    Opciones
+    <img src="https://i.imgur.com/ADXsV7V.png" style="margin-left: auto;">
+  </button>
+  <button>
+    <img src="https://i.imgur.com/hncuM1p.png" style="width: 18px; margin-right: 17px;">
+    Diseño
+    <img src="https://i.imgur.com/ADXsV7V.png" style="margin-left: auto;">
+  </button>
+  <button>
+    <img src="https://i.imgur.com/m6Iruk1.png" style="width: 26px; height: 26px; object-fit: contain; margin-left: -4px; margin-right: 13px;">
+    Entradas (<span id="contadorEntradas">0</span>)
+    <img src="https://i.imgur.com/dv1ijDG.png" style="margin-left: auto;">
+  </button>
+</div>
+
+
+      <div class="entries">
+        <button onclick="ordenarOpciones()">Ordenar</button>
+        <button onclick="mezclarVisual()">
+<img src="https://i.imgur.com/YjGghzG.png" style="width: 16px; height: 20px; object-fit: contain; margin-bottom: 3px;">
+
+
+  Mezclar
+</button>
+
+        <button onclick="limpiarOpciones()">Limpiar</button>
+      </div>
+  <label class="avanzado-label"><input type="checkbox"> Avanzado</label>
+
+      <div class="input-list">
+ <textarea id="textareaOpciones"></textarea>
+
+  <div id="listaOpciones" style="display: none;"></div>
+</div>
+
+      <button class="btn-agregar" onclick="agregarOpcion()">Agregar</button>
+    <div class="mis-ruletas">
+  <img src="https://i.imgur.com/RTOVvkl.png" style="width: 18px; height: 18px; object-fit: contain; margin-right: 13px; margin-left: -2px;">
+  Mis Ruletas (0)
+  <img src="https://i.imgur.com/ADXsV7V.png" style="margin-left: auto;">
+</div>
+
+
+      <div style="display: flex; gap: 10px;">
+        <button class="btn-pink">Guardar</button>
+        <button class="btn-green" onclick="girarRuleta()">▶ Comenzar</button>
+      </div>
+    </div>
+
+    <div class="ruleta-container" id="ruleta-container">
+<img id="flecha" src="https://i.imgur.com/wQCoGvG.png" alt="Flecha" style="width: 60px; height: 75px; object-fit: fill; position: absolute; top: 50%; left: calc(50% + 175px); transform: translateY(-50%) rotate(0deg); z-index: 11;">
+
+  <canvas id="ruleta" width="500" height="500"></canvas>
+  <div id="logo">
+    <img src="https://i.imgur.com/xPdvYbw.png" alt="Logo" style="width: 45px; height: 45px;">
+  </div>
+
+  
+  <div id="resultado"></div>
+</div>
+
+
+  <script>
+    const canvas = document.getElementById("ruleta");
+    const ctx = canvas.getContext("2d");
+    const resultadoDiv = document.getElementById("resultado");
+
+    const listaOpciones = document.getElementById("listaOpciones");
+    const contadorEntradas = document.getElementById("contadorEntradas");
+const textarea = document.getElementById("textareaOpciones");
+
+const checkboxAvanzado = document.querySelector('.avanzado-label input');
+
+checkboxAvanzado.checked = false; // Inicia desactivado desde el principio
+
+checkboxAvanzado.addEventListener("change", () => {
+  if (!checkboxAvanzado.checked) {
+    const lineas = textarea.value.split("\n").map(l => l.trim()).filter(l => l !== "");
+    opciones = [...lineas];
+  }
+
+
+  actualizarListaOpciones();
+});
+
+textarea.addEventListener("input", () => {
+  let lineas = textarea.value.split("\n").map(l => l.trim()).filter(l => l !== "");
+  if (lineas.length > 100) {
+    lineas = lineas.slice(0, 100);
+    textarea.value = lineas.join("\n");
+  }
+  opciones = [...lineas];
+  actualizarListaOpciones();
+});
+
+    const ruletaContainer = document.getElementById("ruleta-container");
+
+    const colores = ["#7280fd", "#fff171", "#7eecec", "#fb8484"];
+
+    let opciones = [];
+let opcionesOriginales = [];
+let opcionesCongeladas = []; // copia congelada SOLO para la ruleta en pantalla completa
+
+
+    let resultadoTrucado = null;
+    let anguloActual = 0;
+let esperandoBorrado = false;
+let pendienteEliminar = null;
+
+
+function actualizarListaOpciones() {
+  const avanzado = document.querySelector('.avanzado-label input').checked;
+  const listaOpcionesDiv = document.getElementById("listaOpciones");
+  const textarea = document.getElementById("textareaOpciones");
+
+  listaOpcionesDiv.innerHTML = "";
+  contadorEntradas.textContent = opciones.length;
+
+  if (avanzado) {
+    // Mostrar lista con porcentajes + engrane y bote rosa
+    textarea.style.display = "none";
+    listaOpcionesDiv.style.display = "block";
+
+    const porcentaje = (100 / opciones.length).toFixed(1);
+
+    opciones.forEach((opcion, index) => {
+      const div = document.createElement("div");
+      div.classList.add("entry-box");
+
+const contenido = document.createElement("div");
+contenido.classList.add("contenido");
+
+const textoSpan = document.createElement("span");
+textoSpan.textContent = opcion;
+textoSpan.style.overflow = "hidden";
+textoSpan.style.textOverflow = "ellipsis";
+textoSpan.style.whiteSpace = "nowrap";
+
+const porcentajeSpan = document.createElement("span");
+porcentajeSpan.textContent = `${porcentaje}%`;
+porcentajeSpan.classList.add("porcentaje");
+
+contenido.appendChild(textoSpan);
+contenido.appendChild(porcentajeSpan);
+
+
+      const tools = document.createElement("div");
+      tools.classList.add("tools");
+
+      const engrane = document.createElement("img");
+      engrane.src = "https://i.imgur.com/IMHjyg8.png";
+      engrane.alt = "engrane";
+
+      const bote = document.createElement("img");
+      bote.src = "https://i.imgur.com/GnkMaNg.png";
+      bote.alt = "bote";
+    bote.onclick = () => {
+  opciones.splice(index, 1);
+  if (!document.fullscreenElement) {
+    opcionesOriginales = [...opciones]; // ✅ solo actualiza si NO estás en pantalla completa
+  }
+  actualizarListaOpciones();
+  dibujarRuleta();
+};
+
+
+
+      tools.appendChild(engrane);
+      tools.appendChild(bote);
+
+     div.appendChild(contenido); // en vez de div.appendChild(span);
+
+contenido.appendChild(porcentajeSpan); // ✅ Que esté dentro del cuadro
+
+
+      div.appendChild(tools);
+      listaOpcionesDiv.appendChild(div);
+    });
+  } else {
+    // Mostrar textarea editable
+    textarea.style.display = "block";
+    listaOpcionesDiv.style.display = "none";
+
+  const textoActual = textarea.value.split("\n").map(l => l.trim()).filter(l => l !== "");
+if (textoActual.join("\n") !== opciones.join("\n")) {
+  textarea.value = opciones.join("\n");
+}
+
+  }
+
+  dibujarRuleta();
+}
+
+
+function agregarOpcion() {
+  const textarea = document.getElementById("textareaOpciones");
+  const lineas = textarea.value.split("\n").map(l => l.trim()).filter(l => l !== "");
+  opciones = [...lineas];
+
+  if (!document.fullscreenElement) {
+    opcionesOriginales = [...lineas]; // 🔄 Solo se actualiza si NO estás en pantalla completa
+  }
+
+  actualizarListaOpciones();
+  dibujarRuleta();
+}
+
+
+
+
+    function eliminarOpcion(index) {
+      opciones.splice(index, 1);
+      actualizarListaOpciones();
+      dibujarRuleta();
+    }
+
+    function ordenarOpciones() {
+      opciones.sort();
+      actualizarListaOpciones();
+      dibujarRuleta();
+    }
+
+    function mezclarVisual() {
+      opciones.sort(() => Math.random() - 0.5);
+      actualizarListaOpciones();
+      dibujarRuleta();
+    }
+
+    function limpiarOpciones() {
+      opciones = [];
+      actualizarListaOpciones();
+      dibujarRuleta();
+    }
+
+angulosBolitas = [];
+
+
+function dibujarRuletaBase() {
+  if (opciones.length === 0) return;
+
+  const angulos = opciones.map(() => (2 * Math.PI) / opciones.length);
+  let anguloInicio = 0;
+
+  opciones.forEach((opcion, index) => {
+    const anguloFin = anguloInicio + angulos[index];
+
+    ctx.beginPath();
+    ctx.moveTo(250, 250);
+    ctx.arc(250, 250, 250, anguloInicio, anguloFin);
+    ctx.fillStyle = colores[index % colores.length];
+    ctx.fill();
+
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+// Dentro de dibujarRuletaBase
+const anguloSegmento = anguloFin - anguloInicio;
+ctx.save();
+ctx.translate(250, 250);
+ctx.rotate((anguloInicio + anguloFin) / 2);
+ctx.textAlign = "right";
+
+ctx.textBaseline = "middle";
+
+const colorFondo = colores[index % colores.length];
+ctx.fillStyle = (colorFondo === "#7280fd") ? "#fff" : "#000";
+
+
+const opcionesMax = 100;
+const fontSizeMax = 26;
+const fontSizeMin = 10;
+const radioTextoMax = 225;
+const radioTextoMin = 170;
+
+// Calcular tamaño de fuente base según número de opciones
+let fontSize = fontSizeMax - ((opciones.length - 1) * ((fontSizeMax - fontSizeMin) / (opcionesMax - 1)));
+fontSize = Math.max(fontSizeMin, fontSize);
+
+ctx.font = `bold ${fontSize}px 'Roboto', sans-serif`;
+
+const radioTextoFijo = 225; // Punto fijo del borde exterior
+const textoWidth = ctx.measureText(opcion).width;
+ctx.fillText(opcion, radioTextoFijo, 0);
+
+ctx.restore();
+
+   if (opciones.length <= 50) {
+  const radioExterior = 250;
+  const bolitaAngulo = anguloInicio % (2 * Math.PI);
+  angulosBolitas.push(bolitaAngulo);
+
+  const bolitaX = 250 + (radioExterior - 10) * Math.cos(bolitaAngulo);
+  const bolitaY = 250 + (radioExterior - 10) * Math.sin(bolitaAngulo);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(bolitaX, bolitaY, 4.5, 0, 2 * Math.PI);
+      ctx.fillStyle = "#fff";
+      ctx.shadowColor = "#000";
+      ctx.shadowBlur = 2;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    anguloInicio = anguloFin;
+  });
+}
+
+function dibujarRuleta() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  dibujarRuletaBase();
+}
+
+
+function mostrarResultado(texto) {
+  resultadoDiv.innerText = texto;
+  resultadoDiv.style.display = 'block';
+
+  const containerRect = ruletaContainer.getBoundingClientRect();
+  const centroY = containerRect.top + containerRect.height / 2;
+  const centroX = containerRect.left + containerRect.width / 2;
+
+  const lados = [
+    { x: containerRect.left, y: containerRect.bottom },
+    { x: containerRect.right, y: containerRect.bottom }
+  ];
+
+  const delay = 1000;
+
+  function lanzarConfeti(lado) {
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = `${lado.x}px`;
+      confetti.style.top = `${lado.y}px`;
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      document.body.appendChild(confetti);
+
+      const translateX = (Math.random() - 0.5) * 2000;
+      const translateY = (Math.random() - 0.5) * 2000;
+      confetti.style.setProperty('--translate-x', `${translateX}px`);
+      confetti.style.setProperty('--translate-y', `${translateY}px`);
+
+      setTimeout(() => confetti.remove(), 2000);
+    }
+  }
+
+  lados.forEach(lado => {
+    lanzarConfeti(lado);
+    setTimeout(() => lanzarConfeti(lado), delay);
+  });
+}
+
+   function girarRuleta() {
+  // Si hay algo pendiente por borrar, borrarlo primero y esperar 1 segundo antes de girar
+if (esperandoBorrado && pendienteEliminar !== null && document.fullscreenElement) {
+  opcionesCongeladas.splice(pendienteEliminar, 1);
+  opciones = [...opcionesCongeladas]; // ⚠️ usa la congelada como base de ruleta
+  actualizarListaOpciones();
+  dibujarRuleta();
+  flecha.style.transform = "translateY(-50%) rotate(0deg)";
+  esperandoBorrado = false;
+  pendienteEliminar = null;
+
+  setTimeout(() => {
+    girarRuleta();
+  }, 1000);
+
+  return;
+}
+
+
+
+
+  if (opciones.length === 0) return;
+
+
+
+let indiceGanador;
+let soloRandom = true;
+const candidatosValidos = [];
+
+// ✅ Protección total: solo permitir `hit X` si se activó el truco
+if (typeof resultadoTrucado === 'number') {
+  soloRandom = false;
+  const numeroTrucado = resultadoTrucado === 0 ? 10 : resultadoTrucado;
+  const regex = new RegExp(`^hit\\s*${numeroTrucado}$`, 'i');
+  for (let i = 0; i < opciones.length; i++) {
+    const op = opciones[i];
+    if (regex.test(op.trim())) {
+      candidatosValidos.push(i);
+    }
+  }
+} else {
+  // 👇 Si no hay truco, evitar completamente cualquier `hit X`
+  for (let i = 0; i < opciones.length; i++) {
+    const op = opciones[i];
+    if (!/^hit\s*\d+$/i.test(op.trim())) {
+      candidatosValidos.push(i);
+    }
+  }
+}
+
+
+
+if (candidatosValidos.length > 0) {
+  indiceGanador = candidatosValidos[Math.floor(Math.random() * candidatosValidos.length)];
+} else {
+  return;
+}
+
+angulos = opciones.map(() => (2 * Math.PI) / opciones.length); // 👈 AGREGA ESTO
+  let anguloInicio = 0;
+  for (let i = 0; i < indiceGanador; i++) {
+    anguloInicio += angulos[i];
+  }
+let anguloGanador;
+let indiceGanadorFinal = indiceGanador;
+
+const total = opciones.length;
+const tamSegmento = (2 * Math.PI) / total;
+
+
+if (resultadoTrucado !== null) {
+  const tamSegmento = (2 * Math.PI) / opciones.length;
+  const inicioSegmento = tamSegmento * indiceGanador;
+
+  // Ajuste fino: empujar un poco más hacia el centro visual del texto
+anguloGanador = inicioSegmento + (tamSegmento / 2);
+
+}
+
+else {
+  // Elige un ángulo dentro del segmento (no necesariamente al centro)
+ let inicioSegmento = anguloInicio;
+let finSegmento = anguloInicio + angulos[indiceGanador];
+
+if (soloRandom) {
+  const i = indiceGanador;
+  const anterior = opciones[(i - 1 + opciones.length) % opciones.length];
+  const siguiente = opciones[(i + 1) % opciones.length];
+
+  const anteriorEsHit = /^hit\s*\d+$/i.test(anterior.trim());
+  const siguienteEsHit = /^hit\s*\d+$/i.test(siguiente.trim());
+
+  let margenBase;
+if (total <= 20) {
+  margenBase = 0.02;
+} else if (total <= 40) {
+  margenBase = 0.06;
+} else if (total <= 60) {
+  margenBase = 0.07;
+} else if (total <= 80) {
+  margenBase = 0.05;
+} else {
+  margenBase = 0.9;
+}
+
+const margenExtra = margenBase * 0.6;
+const margen = (anteriorEsHit || siguienteEsHit) ? margenBase + margenExtra : margenBase;
+
+
+  inicioSegmento += margen;
+  finSegmento -= margen;
+
+  if (finSegmento <= inicioSegmento) {
+    // 👉 Si el margen lo hizo tan pequeño que ya no se puede girar, apunta al centro del segmento
+    anguloGanador = anguloInicio + tamSegmento / 2;
+  } else {
+    anguloGanador = inicioSegmento + Math.random() * (finSegmento - inicioSegmento);
+  }
+} else {
+  // 👉 Si es un hit elegido con número, usa el ángulo normalmente
+  anguloGanador = inicioSegmento + Math.random() * (finSegmento - inicioSegmento);
+}
+
+
+}
+
+
+
+let rotacionFinal;
+
+if (resultadoTrucado !== null) {
+  // Gira exacto al centro del hit elegido
+  rotacionFinal = -anguloGanador + (Math.PI * 10);
+} else {
+  // ⚠️ NO APLICA VARIACIÓN si soloRandom, para no tocar el borde de un hit
+  if (soloRandom) {
+    rotacionFinal = -anguloGanador + (Math.PI * 10);
+  } else {
+    // Solo aplica variación visual si es truco
+    const variacion = (Math.random() - 0.5) * tamSegmento * 0.9;
+    rotacionFinal = - (anguloGanador + variacion) + (Math.PI * 10);
+  }
+}
+
+
+  let inicio = performance.now();
+  const duracion = 9000;
+ let ultimoRebote = -1;
+animacionInicioFlecha();
+
+
+  function animar(timestamp) {
+    let progreso = timestamp - inicio;
+    let t = Math.min(progreso / duracion, 1);
+    let easingProgreso = 1 - Math.pow(2, -10 * t);
+    let angulo = anguloActual + ((rotacionFinal - anguloActual) * easingProgreso);
+    let fuerza = 1 - easingProgreso;
+
+    let inclinacion;
+    if (progreso < 3000) {
+      inclinacion = -30 * (1 - (progreso / 3000));
+    } else {
+      inclinacion = -5 * fuerza;
+    }
+
+    let total = opciones.length;
+    let segmentoActual = Math.floor((2 * Math.PI - (angulo % (2 * Math.PI))) / ((2 * Math.PI) / total));
+
+  if (progreso > 3600) {
+  const umbral = 0.05;
+  const anguloNormalizado = (2 * Math.PI - (angulo % (2 * Math.PI))) % (2 * Math.PI);
+
+  let pasoPorBolita = false;
+
+  if (opciones.length <= 50) {
+    pasoPorBolita = angulosBolitas.some(a => Math.abs(a - anguloNormalizado) < umbral);
+  } else {
+    // Simula puntos de rebote virtuales en cada división
+    const tamSegmento = (2 * Math.PI) / opciones.length;
+    for (let i = 0; i < opciones.length; i++) {
+      const anguloDivisor = i * tamSegmento;
+      if (Math.abs(anguloDivisor - anguloNormalizado) < umbral) {
+        pasoPorBolita = true;
+        break;
+      }
+    }
+  }
+
+  if (pasoPorBolita && segmentoActual !== ultimoRebote) {
+    animarReboteFlecha();
+    ultimoRebote = segmentoActual;
+  }
+}
+
+
+    flecha.style.transformOrigin = "right center";
+
+    if (progreso < duracion) {
+      requestAnimationFrame(animar);
+    } else {
+      anguloActual = angulo % (2 * Math.PI);
+ // Calcular a qué segmento apunta visualmente
+const total = opciones.length;
+const tamSegmento = (2 * Math.PI) / total;
+const indiceReal = total - 1 - Math.floor((anguloActual % (2 * Math.PI)) / tamSegmento);
+
+let ganadorIndex = indiceGanador;
+
+
+mostrarResultado(opciones[ganadorIndex]);
+esperandoBorrado = true;
+pendienteEliminar = ganadorIndex;
+resultadoTrucado = null;
+
+
+
+    }
+
+// Mostrar en vivo el texto por el que va pasando la flecha
+const totalSegmentos = opciones.length;
+const segmentoActualIndex = totalSegmentos - 1 - Math.floor((angulo % (2 * Math.PI)) / ((2 * Math.PI) / totalSegmentos));
+const nombreActual = opciones[segmentoActualIndex];
+resultadoDiv.innerText = nombreActual;
+resultadoDiv.style.display = "block";
+
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(250, 250);
+    ctx.rotate(angulo);
+    ctx.translate(-250, -250);
+    dibujarRuletaBase();
+    ctx.restore();
+  }
+
+
+
+  window.addEventListener("resize", () => {
+    if (document.fullscreenElement) {
+      flecha.style.left = "calc(50% + 245px)";
+    } else {
+      flecha.style.left = "calc(50% + 175px)";
+    }
+  });
+
+  requestAnimationFrame(animar);
+}
+
+
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+    document.body.classList.add("fullscreen");
+    flecha.style.left = "calc(50% + 245px)";
+  } else {
+    document.exitFullscreen();
+    document.body.classList.remove("fullscreen");
+    flecha.style.left = "calc(50% + 175px)";
+  }
+}
+
+function animacionInicioFlecha() {
+  flecha.style.transition = "transform 0.6s ease";
+  flecha.style.transform = "translateY(-50%) rotate(-18deg)"; // ⬅️ Ahora baja
+
+  setTimeout(() => {
+    flecha.style.transition = "none";
+    flecha.style.transform = "translateY(-50%) rotate(-10deg)"; // ⬅️ Subida rápida a -10°
+    setTimeout(() => {
+      flecha.style.transition = "transform 0.13s ease";
+      flecha.style.transform = "translateY(-50%) rotate(0deg)";
+    }, 10);
+  }, 3000);
+}
+
+
+function animarReboteFlecha() {
+  flecha.style.transition = "transform 0.13s ease";
+  flecha.style.transform = "translateY(-50%) rotate(6deg)";
+  setTimeout(() => {
+    flecha.style.transform = "translateY(-50%) rotate(0deg)";
+  }, 130);
+}
+
+
+
+document.addEventListener("fullscreenchange", () => {
+if (!document.fullscreenElement) {
+  document.body.classList.remove("fullscreen");
+  resultadoDiv.style.fontSize = "20px";
+  resultadoDiv.style.top = "15px";
+  resultadoDiv.style.display = "none";
+  flecha.style.left = "calc(50% + 175px)";
+
+  // ✅ Restaurar lista original al salir de pantalla completa
+  opciones = [...opcionesOriginales];
+  opcionesCongeladas = [...opcionesOriginales]; // ← sincroniza también la congelada
+  actualizarListaOpciones();
+  dibujarRuleta();
+
+  // ✅ Cancelar cualquier borrado pendiente
+  esperandoBorrado = false;
+  pendienteEliminar = null;
+
+
+} else {
+  document.body.classList.add("fullscreen");
+  resultadoDiv.style.fontSize = "34px";
+  resultadoDiv.style.top = "-70px";
+  flecha.style.left = "calc(50% + 245px)";
+
+  // 🧊 Congela las opciones actuales al entrar
+  opcionesCongeladas = [...opciones];
+
+  // ✅ Si opcionesOriginales está vacía, la llenamos ahora
+  if (opcionesOriginales.length === 0) {
+    opcionesOriginales = [...opciones];
+  }
+}
+
+
+
+  flecha.style.transition = "none";
+  flecha.style.transform = "translateY(-50%) rotate(0deg)";
+  dibujarRuleta();
+});
+
+
+
+
+
+ruletaContainer.addEventListener("click", () => {
+  if (document.body.classList.contains("fullscreen")) {
+    // 🧽 Antes de girar, borra el resultado anterior
+    resultadoDiv.style.display = 'none';
+    girarRuleta();
+  } else {
+    toggleFullScreen();
+  }
+});
+
+
+document.addEventListener("keydown", (event) => {
+  if (event.key >= "0" && event.key <= "9") {
+    resultadoTrucado = event.key === '0' ? 10 : parseInt(event.key);
+  } else {
+    resultadoTrucado = null;
+  }
+});
+
+actualizarListaOpciones();
+dibujarRuleta();
+
+
+
+
+  </script>
+</body>
+</html>  
+
